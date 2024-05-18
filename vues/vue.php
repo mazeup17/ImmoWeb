@@ -135,6 +135,11 @@ class vue
 	public function inscription($message = null)
 	{
 		$this->entete();
+		if ($message != null) {
+			echo '<div class="alert alert-danger" role="alert">
+						' . $message . '
+					  </div>';
+		}
 		echo "
 				
 					<h2>Inscription</h2>
@@ -157,7 +162,6 @@ class vue
 						</div>
 						<button type=\"submit\" class=\"btn btn-primary\" name=\"ok\">Inscription</button>
 					</form>
-					<p>$message</p>
 				
 			";
 
@@ -384,7 +388,7 @@ class vue
 
 			foreach ($reservation as $uneReserve) {
 				echo '
-						<li>Du ' . $uneReserve["DateDebut"] . ' au ' . $uneReserve['DateFin'] . ' pour le prix de : ' . $uneReserve['Prix'] . '</li>';
+						<li>Du ' . $uneReserve["DateDebut"] . ' au ' . $uneReserve['DateFin'] . ' pour le prix de : ' . $uneReserve['Prix'] . '€</li>';
 
 
 			}

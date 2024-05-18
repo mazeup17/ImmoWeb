@@ -41,23 +41,30 @@ class controleur
 
     public function inscription()
     {
-        (new vue)->inscription();
         if (isset($_POST['ok'])) {
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $mail = $_POST['email'];
             $mdp = $_POST['motdepasse'];
             if (!empty($nom and $prenom and $mail and $mdp)) {
-                if ((new utilisateurs)->inscription($nom, $prenom, $mail, $mdp) == true) {
-                    header("Location: index.php?action=connexion");
+                if (!(new Utilisateurs)->existEmail($mail)) {
+                    if ((new utilisateurs)->inscription($nom, $prenom, $mail, $mdp) == true) {
+                        header("Location: index.php?action=connexion");
+                    } else {
+                        $message = "un probleme est survenu lors de l'inscription";
+                        (new vue)->inscription($message);
+                    }
                 } else {
-                    $message = "un probleme est survenu lors de l'inscription";
+                    $message = "Cette adresse mail est déja attribué à un autre compte.";
                     (new vue)->inscription($message);
                 }
-
-
+            } else {
+                $message = "Veuillez remplir tous les champs";
+                (new vue)->inscription($message);
             }
 
+        } else {
+            (new vue)->inscription();
         }
 
     }
@@ -79,7 +86,6 @@ class controleur
 
             $value = explode(', ', $value);
             $message = "Réservation effectué avec succès";
-            var_dump($value);
             $prix = (new periode)->getPrix($value[0]);
 
             (new reservation)->ajoutReservation($_SESSION['connexion'], $value[0], $id, $prix[0]["prix"], $value[1], $value[2]);

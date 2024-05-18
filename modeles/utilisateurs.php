@@ -31,23 +31,19 @@ class Utilisateurs
 
     public function inscription($nom, $prenom, $mail, $mdp)
     {
-        if (!$this->existEmail($mail)) {
-            $hash = password_hash($mdp, PASSWORD_DEFAULT);
-            $sql = $this->pdo->prepare("INSERT INTO Utilisateurs(Nom, Prenom, Email, MotDePasse, Role) values(:nom, :prenom, :mail, :mdp, 'client')");
 
-            $sql->bindParam(':nom', $nom, PDO::PARAM_STR);
-            $sql->bindParam(':prenom', $prenom, PDO::PARAM_STR);
-            $sql->bindParam(':mail', $mail, PDO::PARAM_STR);
-            $sql->bindParam(':mdp', $hash, PDO::PARAM_STR);
-            if ($sql->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+        $hash = password_hash($mdp, PASSWORD_DEFAULT);
+        $sql = $this->pdo->prepare("INSERT INTO Utilisateurs(Nom, Prenom, Email, MotDePasse, Role) values(:nom, :prenom, :mail, :mdp, 'client')");
+
+        $sql->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $sql->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $sql->bindParam(':mail', $mail, PDO::PARAM_STR);
+        $sql->bindParam(':mdp', $hash, PDO::PARAM_STR);
+        if ($sql->execute()) {
+            return true;
         } else {
             return false;
         }
-
 
     }
 
