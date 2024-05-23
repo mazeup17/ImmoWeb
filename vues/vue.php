@@ -509,6 +509,8 @@ class vue
 				  </div>';
 		}
 
+		echo '<h1 class="text-center">Ajouter des périodes de réservations</h1>';
+
 		echo '<div class="dropdown">
 				<button class="btn btn-secondary btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				  Action
@@ -581,6 +583,7 @@ class vue
 			echo '<div class="alert alert-success" role="alert">' . $succes . '</div>';
 		}
 
+		echo '<h1 class="text-center">Supprimer des périodes de réservations</h1>';
 		echo '<div class="dropdown">
 				<button class="btn btn-secondary btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 					Action
@@ -653,6 +656,8 @@ class vue
 					' . $succes . '
 				  </div>';
 		}
+
+		echo '<h1 class="text-center">Modifier des périodes de réservations</h1>';
 
 		echo '<div class="dropdown">
 				<button class="btn btn-secondary btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
